@@ -8,8 +8,11 @@ void clearScreen() {
     cout << "\033[2J\033[1;1H";
 }
 
-void coffeeList() {
-    vector<string> coffes;
+void clearLine() {
+    cout << "\033[2K";
+}
+void histoire() {
+
 }
 
 void SpaceCtr(string msg) {
@@ -23,10 +26,30 @@ void SpaceCtr(string msg) {
     cout << "*" << endl;
 }
 
+void menuCafefe() {
+    gotoxy(0, 10);
+    clearLine();
+    cout << "0. Caffee faible \n";
+    cout << "1. Caffee fort \n";
+}
+
 void choixCoffee(int choix) {
+
+    // je dois retoucher cette function pour changer je veux qu'àprès 
+    string coffeeFn = "Votre caffe est pret!";
+    int ln = coffeeFn.length();
+    int x = 50 % ln;
     if (choix == 1) {
         gotoxy(0, 9);
-        cout << "Un café fort";
+        for (int i = 0; i < 50; i++) {
+            cout << "|";
+            delay(90);
+        }
+        delay(100);
+        gotoxy(0, 9);
+        clearLine();
+        gotoxy(x, 9);
+        cout << coffeeFn << endl;
     }
     else if (choix == 0) {
         gotoxy(0, 10);
@@ -78,7 +101,7 @@ int main() {
 
     while (true) {
         gotoxy(0, 10);
-        cout << "\033[2K";
+        clearLine();
         cout << "Entrez votre choix entre 1 et 5: ";
         cin >> reponse;
 
@@ -105,9 +128,13 @@ int main() {
                 break;
             case 3:
                 gotoxy(0, 10);
-                cout << "\033[2K";
-                cout << "Tapez 1 pour un café fort, tapez 0 pour un café faible: ";
+                clearLine();
+                menuCafefe();
                 cin >> coffeChoix;
+                for (int i = 10; i < 13; i++) {
+                    gotoxy(0, i);
+                    clearLine();
+                }
                 choixCoffee(coffeChoix);
 
         }
